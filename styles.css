@@ -1,5 +1,7 @@
 body {
-  background: #ffc0cb !important;
+  background: #ffc0cb; !important;
+  height: 100vh;
+  overflow: hidden;
 }
 /* center all */
 #ui .love {
