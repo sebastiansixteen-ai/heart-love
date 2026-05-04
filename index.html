@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I Love You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+#heart {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.word {
+  position: absolute;
+  color: #ff4da6;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 8px #ff4da6, 0 0 15px #ff4da6;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+  50%  { transform: translate(-50%, -50%) translateY(-15px) scale(1.15); }
+  100% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="heart"></div>
+
+<script>
+const container = document.getElementById("heart");
+
+function heart(t) {
+  return {
+    x: 16 * Math.pow(Math.sin(t), 3),
+    y: 13 * Math.cos(t)
+       - 5 * Math.cos(2 * t)
+       - 2 * Math.cos(3 * t)
+       - Math.cos(4 * t)
+  };
+}
+
+let scale = 20;
+
+for (let t = 0; t < Math.PI * 2; t += 0.045) {
+  let pos = heart(t);
+
+  let el = document.createElement("div");
+  el.className = "word";
+  el.innerText = "I Love You";
+
+  el.style.left = window.innerWidth / 2 + pos.x * scale + "px";
+  el.style.top  = window.innerHeight / 2 - pos.y * scale + "px";
+
+  /* wave animation delay (important) */
+  el.style.animationDelay = (t * 0.3) + "s";
+
+  container.appendChild(el);
+}
+</script>
+
+</body>
+</html>
