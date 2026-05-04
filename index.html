@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I Love You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ❤️ HEART CONTAINER */
+#heart {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 💖 PARTICLE TEXT */
+.word {
+  position: absolute;
+  color: #ff4da6;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 8px #ff4da6, 0 0 15px #ff4da6;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* 🌊 smooth floating */
+@keyframes float {
+  0%   { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+  50%  { transform: translate(-50%, -50%) translateY(-15px) scale(1.15); }
+  100% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+}
+
+/* 🧡 NAME IN MIDDLE */
+#centerName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  color: white;
+  font-size: 42px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+
+  text-shadow: 0 0 10px #ff4da6, 0 0 25px #ff4da6;
+
+  z-index: 999;
+  pointer-events: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🧡 CENTER NAME -->
+
+<div id="centerName">MARIAN ❤️</div>
+
+<!-- 💖 HEART -->
+
+<div id="heart"></div>
+
+<script>
+const container = document.getElementById("heart");
+
+function heart(t) {
+  return {
+    x: 16 * Math.pow(Math.sin(t), 3),
+    y: 13 * Math.cos(t)
+       - 5 * Math.cos(2 * t)
+       - 2 * Math.cos(3 * t)
+       - Math.cos(4 * t)
+  };
+}
+
+let scale = 20;
+
+/* create heart particles */
+for (let t = 0; t < Math.PI * 2; t += 0.045) {
+  let pos = heart(t);
+
+  let el = document.createElement("div");
+  el.className = "word";
+  el.innerText = "I Love You";
+
+  el.style.left = window.innerWidth / 2 + pos.x * scale + "px";
+  el.style.top  = window.innerHeight / 2 - pos.y * scale + "px";
+
+  /* TikTok wave effect */
+  el.style.animationDelay = (t * 0.3) + "s";
+
+  container.appendChild(el);
+}
+</script>
+
+</body>
+</html>
